@@ -21,7 +21,7 @@ class Graph {
 
 		while (newNeighbors>0){
 			System.out.println("------------------------------");
-			System.out.println("looking for neighbors at distance: " + distance);
+			System.out.println("Looking for neighbors at distance: " + distance);
 			//the number of nodes to check in this iteration
 			int nodesToCheck = newNeighbors;
 			//the number of nodes to check in the next iteration
