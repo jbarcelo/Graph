@@ -14,6 +14,7 @@ import org.json.JSONArray;
 
 import java.util.concurrent.TimeUnit;
 
+import java.util.Scanner;
 
 class Graph {
 
@@ -40,11 +41,19 @@ class Graph {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String target = "tcampaner"; //the user we are searching for
 		int newNeighbors=1; //the starting point is the only new neighbor
 		int neighborsChecked=0; //we haven't checked for neighbors of any node yet
 		int distance = 1; // in the first iteration we'll look for nodes at distance 1
 		LinkedList<String> neighbors = new LinkedList<String>(); // data structure to store the neighbors
+
+		Scanner myScanner = new Scanner(System.in);
+		System.out.println("IMPORTANT: The GitHub API is limited to 60 requests/hour. If we reach that limit the program will fail");
+		System.out.println("Enter the user to start the search:");
+		String originUser = myScanner.nextLine();
+		System.out.println("Enter the user to search:");
+		String targetUser = myScanner.nextLine();
+
+
 		neighbors.add("jbarcelo"); //this is the root, the starting point
 
 		while (newNeighbors>0){
@@ -62,8 +71,8 @@ class Graph {
 					String login = json.getJSONObject(jsonCounter).getString("login");
 					System.out.println("Node " + login + " is adjacent");
 					if (!neighbors.contains(login)){
-						if (login.equals(target)) {
-							System.out.println("We found "+login+"at distance "+distance);
+						if (login.equals(targetUser)) {
+							System.out.println("We found "+login+" at distance "+distance);
 							System.exit(0);
 						}
 						System.out.println("Node " + login + " is not in our list. We add it.");
