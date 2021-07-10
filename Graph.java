@@ -1,6 +1,12 @@
 import java.util.LinkedList;
 
 class Graph {
+	//Utilitzarem una estructura estàtica per al graf
+	//Això ens limita el nombre de nodes
+	//però l'exercici no és sobre el graf,
+	//ja que es suposa que aquest s'emmagatzema a github.
+	//Utilitzarem aquesta constant per simular obtenir la "llista d'amistats".
+	//És a dir, s'utilitza per simular la feina de github, però no en l'algorisme de cerca.
 	static final int NONODES = 6; //number of nodes
 	public static void main(String[] args) {
 		// We use and adjacency matrix as a trivial implementation of a graph. 
