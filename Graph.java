@@ -6,12 +6,12 @@ class Graph {
 		// We use and adjacency matrix as a trivial implementation of a graph. 
 		// This is not optimum in any way, but it is not the goal of this exercise to implement a graph.
 		boolean adjacencyMatrix[][] = new boolean[NONODES][NONODES];
-		adjacencyMatrix[0][1]=true; adjacencyMatrix[1][0]=true;
-		adjacencyMatrix[0][2]=true; adjacencyMatrix[2][0]=true;
-		adjacencyMatrix[1][3]=true; adjacencyMatrix[3][1]=true;
-		adjacencyMatrix[2][3]=true; adjacencyMatrix[3][2]=true;
-		adjacencyMatrix[3][4]=true; adjacencyMatrix[4][3]=true;
-		adjacencyMatrix[4][5]=true; adjacencyMatrix[5][4]=true;
+		adjacencyMatrix[0][1]=true; adjacencyMatrix[1][0]=true; // 0 and 1 are neighbors
+		adjacencyMatrix[0][2]=true; adjacencyMatrix[2][0]=true; // 0 and 2 are neighbors
+		adjacencyMatrix[1][3]=true; adjacencyMatrix[3][1]=true; // 1 and 3 are neighbors
+		adjacencyMatrix[2][3]=true; adjacencyMatrix[3][2]=true; // 2 and 3 are neighbors
+		adjacencyMatrix[3][4]=true; adjacencyMatrix[4][3]=true; // 3 and 4 are neighbors
+		adjacencyMatrix[4][5]=true; adjacencyMatrix[5][4]=true; // 4 and 5 are neighbors
 
 		int newNeighbors=1; //the root is the only new neighbor
 		int neighborsChecked=0; //we haven't checked for neighbors of any node yet
