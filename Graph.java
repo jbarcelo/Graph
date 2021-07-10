@@ -1,28 +1,49 @@
 import java.util.LinkedList;
 
-class Graph {
-	//Utilitzarem una estructura estàtica per al graf
-	//Això ens limita el nombre de nodes
-	//però l'exercici no és sobre el graf,
-	//ja que es suposa que aquest s'emmagatzema a github.
-	//Utilitzarem aquesta constant per simular obtenir la "llista d'amistats".
-	//És a dir, s'utilitza per simular la feina de github, però no en l'algorisme de cerca.
-	static final int NONODES = 6; //number of nodes
-	public static void main(String[] args) {
-		// We use and adjacency matrix as a trivial implementation of a graph. 
-		// This is not optimum in any way, but it is not the goal of this exercise to implement a graph.
-		boolean adjacencyMatrix[][] = new boolean[NONODES][NONODES];
-		adjacencyMatrix[0][1]=true; adjacencyMatrix[1][0]=true; // 0 and 1 are neighbors
-		adjacencyMatrix[0][2]=true; adjacencyMatrix[2][0]=true; // 0 and 2 are neighbors
-		adjacencyMatrix[1][3]=true; adjacencyMatrix[3][1]=true; // 1 and 3 are neighbors
-		adjacencyMatrix[2][3]=true; adjacencyMatrix[3][2]=true; // 2 and 3 are neighbors
-		adjacencyMatrix[3][4]=true; adjacencyMatrix[4][3]=true; // 3 and 4 are neighbors
-		adjacencyMatrix[4][5]=true; adjacencyMatrix[5][4]=true; // 4 and 5 are neighbors
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.nio.charset.Charset;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
+import java.util.concurrent.TimeUnit;
+
+
+class Graph {
+
+	private static String readAll(Reader rd) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		int cp;
+		while ((cp = rd.read()) != -1) {
+			sb.append((char) cp);
+		}
+		return sb.toString();
+	}
+
+	public static JSONArray readJsonFromUrl(String url) throws IOException, JSONException {
+		InputStream is = new URL(url).openStream();
+		try {
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+			String jsonText = readAll(rd);
+			System.out.println(jsonText);
+			JSONArray json = new JSONArray(jsonText);
+			return json;
+		} finally {
+			is.close();
+		}
+	}
+
+	public static void main(String[] args) {
 		int newNeighbors=1; //the starting point is the only new neighbor
 		int neighborsChecked=0; //we haven't checked for neighbors of any node yet
 		int distance = 1; // in the first iteration we'll look for nodes at distance 1
-		LinkedList<Integer> neighbors = new LinkedList<Integer>(); // data structure to store the neighbors
+		LinkedList<String> neighbors = new LinkedList<String>(); // data structure to store the neighbors
 		neighbors.add(0); //this is the root, the starting point
 
 		while (newNeighbors>0){
@@ -33,24 +54,24 @@ class Graph {
 			//the number of nodes to check in the next iteration
 			newNeighbors = 0;
 			for (int i=0; i<nodesToCheck; i++){
-				//Integer neighbor = neighborsIterator.next();
 				Integer neighbor = neighbors.get(neighborsChecked+i);
 				System.out.println("Looking for neighbors of node " + neighbor);
-				for (Integer j = 0; j < NONODES; j++){
-					if (adjacencyMatrix[neighbor][j]){
-						System.out.println("Node " + j + " is adjacent");
-						if (!neighbors.contains(j)){
-							System.out.println("Node " + j + " is not in our list. We add it.");
-							System.out.println("At this point we should verify if the new node satisfied the search condition.");
-							neighbors.add(j);
-							newNeighbors++;
-						}
+				JSONArray json = readJsonFromUrl("https://api.github.com/users/jbarcelo/following");
+				for (int jsonCounter=0; jsonCounter<json.length(); jsonCounter++){
+					String login = json.getJSONObject(jsonCounter).getString("login");
+					System.out.println("Node " + login + " is adjacent");
+					if (!neighbors.contains(login)){
+						System.out.println("Node " + login + " is not in our list. We add it.");
+						System.out.println("At this point we should verify if the new node satisfied the search condition.");
+						neighbors.add(j);
+						newNeighbors++;
 					}
 				}
 			}
 			neighborsChecked+=nodesToCheck;
 			distance++;
 			System.out.println("newNeighbors found: " + newNeighbors);
+			TimeUnit.SECONDS.sleep(1);
 		}
 
 	}
