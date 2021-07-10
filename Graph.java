@@ -1,5 +1,4 @@
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 class Graph {
 	static final int NONODES = 6; //number of nodes
