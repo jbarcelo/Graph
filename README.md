@@ -1,6 +1,6 @@
 # Graph
 
-jbarcelo@jbarcelo-Inspiron-5570:~/development/repos/Graph$ java -cp json-20210307.jar:. Graph   
+jbarcelo@jbarcelo-Inspiron-5570:~/development/repos/Graph$ java -cp json-20210307.jar:. GitHubGraph   
 IMPORTANT: The GitHub API is limited to 60 requests/hour. If we reach that limit the program will fail  
 Enter the user to start the search:  
 jbarcelo  
