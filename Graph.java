@@ -13,7 +13,7 @@ class Graph {
 		adjacencyMatrix[3][4]=true; adjacencyMatrix[4][3]=true; // 3 and 4 are neighbors
 		adjacencyMatrix[4][5]=true; adjacencyMatrix[5][4]=true; // 4 and 5 are neighbors
 
-		int newNeighbors=1; //the root is the only new neighbor
+		int newNeighbors=1; //the starting point is the only new neighbor
 		int neighborsChecked=0; //we haven't checked for neighbors of any node yet
 		int distance = 1; // in the first iteration we'll look for nodes at distance 1
 		LinkedList<Integer> neighbors = new LinkedList<Integer>(); // data structure to store the neighbors
