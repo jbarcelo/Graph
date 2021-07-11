@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import java.util.Scanner;
 
-class Graph {
+class GitHubGraph {
 
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
