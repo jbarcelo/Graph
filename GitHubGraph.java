@@ -63,8 +63,8 @@ class GitHubGraph {
 			int nodesToCheck = newNeighbors;
 			//the number of nodes to check in the next iteration
 			newNeighbors = 0;
-			for (int i=0; i<nodesToCheck; i++){
-				String neighbor = neighbors.get(neighborsChecked+i);
+			for (int i=neighborsChecked; i<neighborsChecked+nodesToCheck; i++){
+				String neighbor = neighbors.get(i);
 				System.out.println("Looking for neighbors of node " + neighbor);
 				JSONArray json = readJsonFromUrl("https://api.github.com/users/"+neighbor+"/following");
 				for (int jsonCounter=0; jsonCounter<json.length(); jsonCounter++){

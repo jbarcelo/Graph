@@ -32,9 +32,8 @@ class Graph {
 			int nodesToCheck = newNeighbors;
 			//the number of nodes to check in the next iteration
 			newNeighbors = 0;
-			for (int i=0; i<nodesToCheck; i++){
-				//Integer neighbor = neighborsIterator.next();
-				Integer neighbor = neighbors.get(neighborsChecked+i);
+			for (int i=neighborsChecked; i<neighborsChecked+nodesToCheck; i++){
+				Integer neighbor = neighbors.get(i);
 				System.out.println("Looking for neighbors of node " + neighbor);
 				for (Integer j = 0; j < NONODES; j++){
 					if (adjacencyMatrix[neighbor][j]){
